@@ -3,22 +3,24 @@ import { CreateProductType } from '@modules/products/@types/create-product/creat
 import { ProductRepository } from '@modules/products/typeorm/repositories/products.repository';
 import AppError from '@shared/errors/AppError';
 import { StatusCodes } from 'http-status-codes';
+import { getCustomRepository } from 'typeorm';
 
 export class CreateProductService {
-  constructor(private readonly productRepository: ProductRepository) {}
   public async execute({
     name,
     price,
     quantity,
   }: CreateProductType): Promise<Product> {
-    const productExists = await this.productRepository.findByName(name);
+    const productRepository = getCustomRepository(ProductRepository);
+    const productExists = await productRepository.findByName(name);
     if (productExists) {
       throw new AppError(
         'There is already one product with this name',
         StatusCodes.CONFLICT,
       );
     }
-    const product = this.productRepository.create({ name, price, quantity });
-    return await this.productRepository.save(product);
+    const product = productRepository.create({ name, price, quantity });
+    await productRepository.save(product);
+    return product;
   }
 }
