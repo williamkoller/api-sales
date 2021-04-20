@@ -1,5 +1,6 @@
-export interface ICreateProduct {
+export type UpdateProductType = {
+  id: string;
   name: string;
   price: number;
   quantity: number;
-}
+};
