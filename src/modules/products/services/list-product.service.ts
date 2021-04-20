@@ -2,11 +2,13 @@ import { ProductRepository } from '@modules/products/typeorm/repositories/produc
 import AppError from '@shared/errors/AppError';
 import Product from '@modules/products/typeorm/entities/product';
 import { StatusCodes } from 'http-status-codes';
+import { getCustomRepository } from 'typeorm';
 
 export class ListProductService {
-  constructor(private readonly productRepository: ProductRepository) {}
   async execute(): Promise<Product[]> {
-    const products = await this.productRepository.find();
+    const productRepository = getCustomRepository(ProductRepository);
+
+    const products = await productRepository.find();
     if (!products?.length) {
       throw new AppError('No record found.', StatusCodes.NOT_FOUND);
     }
