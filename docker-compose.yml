@@ -1,0 +1,19 @@
+version: '3'
+services:
+  db_api_sales:
+    image: postgres:13.3-alpine
+    container_name: db_api_sales
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    volumes:
+      - api_sales_data:/var/lib/postgresql/data
+
+volumes:
+  api_sales_data:
