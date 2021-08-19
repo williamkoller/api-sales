@@ -1,4 +1,4 @@
-import { ProductRepository } from '@modules/products/typeorm/repositories/products.repository';
+import ProductsRepository from '@modules/products/typeorm/repositories/products.repository';
 import AppError from '@shared/errors/AppError';
 import Product from '@modules/products/typeorm/entities/product';
 import { StatusCodes } from 'http-status-codes';
@@ -12,13 +12,13 @@ export class UpdateProductService {
     price,
     quantity,
   }: UpdateProductType): Promise<Product> {
-    const productRepository = getCustomRepository(ProductRepository);
+    const productsRepository = getCustomRepository(ProductsRepository);
 
-    const product = await productRepository.findOne(id);
+    const product = await productsRepository.findOne(id);
     if (!product) {
       throw new AppError('Product not found.', StatusCodes.NOT_FOUND);
     }
-    const productExists = await productRepository.findByName(name);
+    const productExists = await productsRepository.findByName(name);
     if (productExists) {
       throw new AppError(
         'There is already one product with this name',
@@ -29,7 +29,7 @@ export class UpdateProductService {
     product.price = price;
     product.quantity = quantity;
 
-    await productRepository.save(product);
+    await productsRepository.save(product);
     return product;
   }
 }
