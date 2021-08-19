@@ -1,8 +1,8 @@
-import { Request, Response } from 'express';
-import { StatusCodes } from 'http-status-codes';
+import User from '@modules/users/typeorm/entities/user';
 import { CreateUserService } from '@modules/users/services/create-user.service';
 import { ListUsersService } from '@modules/users/services/list-users.service';
-import User from '@modules/users/typeorm/entities/user';
+import { Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 
 export default class UsersController {
   public async index(

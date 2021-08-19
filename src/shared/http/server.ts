@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-require('dotenv').config();
+import 'dotenv/config';
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
 import cors from 'cors';
@@ -20,12 +20,12 @@ app.use(
     if (error instanceof AppError) {
       return response
         .status(error.statusCode)
-        .json({ status: 'error', message: error.message, error });
+        .json({ status: 'error', message: error.message });
     }
 
     return response
       .status(500)
-      .json({ status: 'error', message: 'Internal server error', error });
+      .json({ status: 'error', message: 'Internal server error' });
   },
 );
 

@@ -1,17 +1,23 @@
-import User from '@modules/users/typeorm/entities/user';
-import { CreateUserType } from '@modules/users/@types/create-user/create-user.type';
-import { getCustomRepository } from 'typeorm';
-import { UsersRepository } from '../typeorm/repositories/users.repository';
+import { UsersRepository } from '@modules/users/typeorm/repositories/users.repository';
 import AppError from '@shared/errors/AppError';
-import { hashSync, genSaltSync } from 'bcrypt';
+import User from '@modules/users/typeorm/entities/user';
 import { StatusCodes } from 'http-status-codes';
+import { hashSync, genSaltSync } from 'bcrypt';
+import { getCustomRepository } from 'typeorm';
+
+interface IRequest {
+  name: string;
+  email: string;
+  password: string;
+}
 
 export class CreateUserService {
-  public async execute({
-    name,
-    email,
-    password,
-  }: CreateUserType): Promise<User> {
+  /**
+   * @param {IRequest} { name, email, password }
+   * @return {*}  {Promise<User>}
+   * @memberof CreateUserService
+   */
+  public async execute({ name, email, password }: IRequest): Promise<User> {
     const usersRepository = getCustomRepository(UsersRepository);
     const userExists = await usersRepository.findByEmail(email);
 
