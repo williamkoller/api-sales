@@ -3,9 +3,9 @@ import User from '@modules/users/typeorm/entities/user';
 import AppError from '@shared/errors/AppError';
 import { StatusCodes } from 'http-status-codes';
 import { getCustomRepository } from 'typeorm';
-import { compareSync } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import authConfig from '@config/auth';
+import { comparerHasher } from '@utils/cryptography/comparer-hasher/comparer-hasher';
 
 interface IRequest {
   email: string;
@@ -39,7 +39,7 @@ export class CreateSessionService {
       );
     }
 
-    const isValid = compareSync(password, user.password);
+    const isValid = comparerHasher(password, user.password);
 
     if (!isValid) {
       throw new AppError(

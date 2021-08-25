@@ -2,8 +2,8 @@ import { UsersRepository } from '@modules/users/typeorm/repositories/users.repos
 import AppError from '@shared/errors/AppError';
 import User from '@modules/users/typeorm/entities/user';
 import { StatusCodes } from 'http-status-codes';
-import { hashSync, genSaltSync } from 'bcrypt';
 import { getCustomRepository } from 'typeorm';
+import { hasher } from '@utils/cryptography/hasher/hasher';
 
 interface IRequest {
   name: string;
@@ -25,8 +25,7 @@ export class CreateUserService {
       throw new AppError('Email address already used.', StatusCodes.CONFLICT);
     }
 
-    const salt = genSaltSync();
-    const hash = hashSync(password, salt);
+    const hash = await hasher(password);
 
     const user = usersRepository.create({
       name,
