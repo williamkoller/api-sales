@@ -33,3 +33,11 @@
   }
   ```
   - rodar docker `docker-compose up -d && yarn dev`
+
+- Postman
+  - Como pegar token automaticamente
+  - Ir no tab de tests do postman
+    ```
+    var res = pm.response.json();
+    pm.environment.set('token', res.token);
+    ```
