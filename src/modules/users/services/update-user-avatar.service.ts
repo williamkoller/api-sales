@@ -8,7 +8,7 @@ import { promises } from 'fs';
 
 interface IRequest {
   userId: string;
-  avatarFilename: string;
+  avatarFilename: string | undefined;
 }
 
 export class UpdateUserAvatarService {
