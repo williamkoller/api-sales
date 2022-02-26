@@ -1,8 +1,10 @@
 # API de Vendas
 
 - Etapas para setup
+
   - `yarn`
   - `cp -r env.example .env`
+
     ```
     # Database
     POSTGRES_HOST=localhost
@@ -16,7 +18,9 @@
     JWT_SECRET=secret
     JWT_EXPIRES_IN=30m
     ```
+
   - criar arquivo `ormconfig.json`
+
   ```
   {
     "type": "postgres",
@@ -25,13 +29,14 @@
     "username": "root",
     "password": "root",
     "database": "db_api_sales",
-    "synchronize": true,
     "logging": false,
-    "entities": ["src/modules/**/typeorm/entities/**.ts"],
-    "migrations": ["src/shared/typeorm/migrations/*.ts"],
-    "subscribers": ["src/subscriber/**/*.ts"]
+    "migrations": ["./src/shared/typeorm/migrations/*.ts"],
+    "cli": {
+      "migrationsDir": "./src/shared/typeorm/migrations"
   }
+
   ```
+
   - rodar docker `docker-compose up -d && yarn dev`
 
 - Postman
