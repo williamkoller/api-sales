@@ -12,7 +12,7 @@ export class SendForgotPasswordEmailService {
     const usersRepository = getCustomRepository(UsersRepository);
     const userTokensRepository = getCustomRepository(UserTokensRepository);
 
-    const user = await usersRepository.findByEmail(email);
+    const user = await usersRepository.findByEmailForgot(email);
 
     if (!user) {
       throw new AppError('User does not exists.');
