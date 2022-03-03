@@ -8,3 +8,6 @@ dist/
 
 uploads/*
 !uploads/.gitkeep
+
+yarn.lock
+yarn-error.*
