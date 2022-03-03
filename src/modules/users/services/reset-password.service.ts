@@ -38,5 +38,7 @@ export class ResetPasswordService {
     }
 
     user.password = hashPassword(password);
+
+    await usersRepository.save(user);
   }
 }
