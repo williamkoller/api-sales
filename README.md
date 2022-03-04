@@ -2,7 +2,7 @@
 
 - Etapas para setup
 
-  - `yarn`
+  - `yarn install --frozen-lockfile`
   - `cp -r env.example .env`
 
     ```
@@ -38,6 +38,7 @@
     }
   ```
 
+  - rodar migrations `yarn typeorm migration:run`
   - rodar docker `docker-compose up -d && yarn dev`
 
 - Postman
