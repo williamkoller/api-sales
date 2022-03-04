@@ -38,13 +38,13 @@
   }
   ```
 
-  - rodar migrations `yarn typeorm migration:run`
   - rodar docker `docker-compose up -d && yarn dev`
+  - rodar migrations `yarn typeorm migration:run`
 
 - Postman
   - Como pegar token automaticamente
   - Ir no tab de tests do postman
-  
+
     ```
     var res = pm.response.json();
     pm.environment.set('token', res.token);
