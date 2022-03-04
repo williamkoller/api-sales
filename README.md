@@ -7,16 +7,16 @@
 
     ```
     # Database
-    POSTGRES_HOST=localhost
-    POSTGRES_USER=root
-    POSTGRES_PASSWORD=root
-    POSTGRES_DATABASE=db_api_sales
-    POSTGRES_PORT=5432
+    POSTGRES_HOST=
+    POSTGRES_USER=
+    POSTGRES_PASSWORD=
+    POSTGRES_DATABASE=
+    POSTGRES_PORT=
 
     # Application
-    PORT=3000
-    JWT_SECRET=secret
-    JWT_EXPIRES_IN=30m
+    PORT=300
+    JWT_SECRET=
+    JWT_EXPIRES_IN=
     ```
 
   - criar arquivo `ormconfig.json`
@@ -35,7 +35,7 @@
     "migrations": ["./src/shared/typeorm/migrations/*.ts"],
     "cli": {
       "migrationsDir": "./src/shared/typeorm/migrations"
-    }
+  }
   ```
 
   - rodar migrations `yarn typeorm migration:run`
@@ -44,6 +44,7 @@
 - Postman
   - Como pegar token automaticamente
   - Ir no tab de tests do postman
+  
     ```
     var res = pm.response.json();
     pm.environment.set('token', res.token);
