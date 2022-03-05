@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import mailConfig from '@config/mail';
 
 interface ISendMail {
   to: string;
@@ -12,8 +13,8 @@ export default class EtherealMail {
       service: 'mailtrap',
       port: 2525,
       auth: {
-        user: 'b6ede333116e68',
-        pass: 'f1731f5092a7f3',
+        user: mailConfig.user,
+        pass: mailConfig.pass,
       },
       logger: true,
     });
