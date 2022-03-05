@@ -20,9 +20,9 @@ export default class EtherealMail {
     });
 
     const message = await transporter.sendMail({
-      from: 'williamkoller30@gmail.com',
+      from: 'no_reply@api_sales.com',
       to,
-      subject: 'Recuperacao de senha',
+      subject: '[API-SALES] - password recovery',
       text: body,
     });
 
