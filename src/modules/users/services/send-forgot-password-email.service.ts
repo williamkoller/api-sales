@@ -23,9 +23,7 @@ export class SendForgotPasswordEmailService {
 
     await EtherealMail.sendMail({
       to: user.email,
-      body: `Received password reset request: ${JSON.stringify(
-        userToken?.token,
-      )}`,
+      body: `Received password reset request: ${userToken?.token}`,
     });
   }
 }
