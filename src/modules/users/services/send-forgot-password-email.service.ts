@@ -26,7 +26,7 @@ export class SendForgotPasswordEmailService {
         name: user.name,
         email: user.email,
       },
-      subject: '[API SALES] passoword recovery',
+      subject: '[API SALES] password recovery',
       templateData: {
         template: `Hello {{name}}: {{token}}`,
         variables: {
