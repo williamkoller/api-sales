@@ -36,7 +36,7 @@ export default class CustomersController {
   ): Promise<Response<Customer>> {
     const { id } = request.params;
     const showCustomerService = new ShowCustomerService();
-    const customer = showCustomerService.execute({ id });
+    const customer = await showCustomerService.execute({ id });
     return response.status(StatusCodes.OK).json(customer);
   }
 
@@ -47,7 +47,11 @@ export default class CustomersController {
     const { name, email } = request.body;
     const { id } = request.params;
     const updateCustomerService = new UpdateCustomerService();
-    const customerUpdate = updateCustomerService.execute({ id, name, email });
+    const customerUpdate = await updateCustomerService.execute({
+      id,
+      name,
+      email,
+    });
     return response.status(StatusCodes.OK).json(customerUpdate);
   }
 
@@ -57,7 +61,7 @@ export default class CustomersController {
   ): Promise<Response<void>> {
     const { id } = request.params;
     const deleteCustomerService = new DeleteCustomerService();
-    const customer = deleteCustomerService.execute({ id });
+    const customer = await deleteCustomerService.execute({ id });
     return response.status(StatusCodes.NO_CONTENT).json(customer);
   }
 }
