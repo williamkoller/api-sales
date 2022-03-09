@@ -12,6 +12,8 @@ export class CustomersRepository extends Repository<Customer> {
   }
 
   public async findByEmail(email: string): Promise<Customer | undefined> {
-    return await this.findOne({ where: { email } });
+    return await this.createQueryBuilder('users')
+      .where('(users.email = :email)', { email })
+      .getOne();
   }
 }
